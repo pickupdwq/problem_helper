@@ -1,30 +1,120 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getAllPosts } from '../utils/posts';
+
+const recentPosts = getAllPosts().slice(0, 3);
 ---
 
-<Layout title="重定向中..." description="正在跳转到博客页面">
-	<meta http-equiv="refresh" content="0;url=/posts" />
-	<section class="redirect-page">
-		<p>正在前往文章列表。</p>
-		<a href="/posts">如果没有自动跳转，点击这里继续</a>
+<Layout title="派" description="派的极简博客，记录写作、问题拆解与持续更新的思考。">
+	<section class="home-page">
+		<header class="home-hero">
+			<p class="home-kicker">派</p>
+			<h1>写作、笔记与问题拆解</h1>
+			<p class="home-summary">
+				这里收纳持续更新的文章、技术思考和长期有用的问题分析。
+			</p>
+		</header>
+
+		<section class="home-section" aria-labelledby="recent-posts">
+			<div class="section-head">
+				<h2 id="recent-posts">最新文章</h2>
+				<a href="/posts">查看全部</a>
+			</div>
+			<div class="home-feed">
+				{recentPosts.map((post) => (
+					<article class="home-entry">
+						<h3 class="home-entry-title">
+							<a href={post.url}>{post.frontmatter.title}</a>
+						</h3>
+						{post.description && <p class="home-entry-summary">{post.description}</p>}
+						<time datetime={post.pubDate.toISOString()}>{post.formattedDate}</time>
+					</article>
+				))}
+			</div>
+		</section>
 	</section>
 </Layout>
 
 <style>
-	.redirect-page {
+	.home-page {
 		max-width: var(--content-width);
-		padding-top: 3rem;
+	}
+
+	.home-hero {
+		padding: 2rem 0 3rem;
+	}
+
+	.home-kicker {
+		margin: 0;
+		font-size: 0.92rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+	}
+
+	.home-hero h1 {
+		margin: 0.9rem 0 0;
+		font-size: clamp(2.3rem, 5vw, 3.8rem);
+		line-height: 1.05;
+		letter-spacing: -0.04em;
+	}
+
+	.home-summary {
+		margin: 1.1rem 0 0;
+		max-width: 32rem;
+		font-size: 1rem;
 		color: var(--text-secondary);
 	}
 
-	.redirect-page p {
-		margin: 0;
-		font-size: 1rem;
+	.home-section {
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(15, 23, 42, 0.08);
 	}
 
-	.redirect-page a {
+	.section-head {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.section-head h2 {
+		margin: 0;
+		font-size: 1.3rem;
+	}
+
+	.section-head a {
+		font-size: 0.95rem;
+		color: var(--text-secondary);
+	}
+
+	.home-feed {
+		display: grid;
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	.home-entry-title {
+		margin: 0;
+		font-size: 1.4rem;
+		line-height: 1.3;
+	}
+
+	.home-entry-summary {
+		margin: 0.7rem 0 0;
+		color: var(--text-secondary);
+	}
+
+	.home-entry time {
 		display: inline-block;
 		margin-top: 0.85rem;
-		color: var(--text-primary);
+		font-size: 0.92rem;
+		color: var(--text-muted);
+	}
+
+	@media (max-width: 640px) {
+		.home-hero {
+			padding: 1rem 0 2.5rem;
+		}
 	}
 </style>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+	<title id="title">派</title>
+	<desc id="desc">派的极简博客分享图</desc>
+	<defs>
+		<linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+			<stop offset="0%" stop-color="#fbfbf8" />
+			<stop offset="100%" stop-color="#f0eee8" />
+		</linearGradient>
+	</defs>
+	<rect width="1200" height="630" fill="url(#bg)" />
+	<circle cx="168" cy="146" r="54" fill="#111827" opacity="0.08" />
+	<rect x="110" y="100" width="980" height="430" rx="28" fill="#fffdf8" stroke="#111827" stroke-opacity="0.08" />
+	<text x="160" y="258" fill="#111827" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="112" font-weight="700">派</text>
+	<text x="160" y="346" fill="#4b5563" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="36">
+		<tspan x="160" dy="0">极简写作、笔记与问题拆解。</tspan>
+		<tspan x="160" dy="56">适合百度、Google 与 Bing 抓取的静态内容站。</tspan>
+	</text>
+</svg>

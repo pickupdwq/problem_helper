@@ -1,27 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getAllPosts } from '../../utils/posts';
 
-const allPosts = import.meta.glob('./*.md', { eager: true });
-const posts = Object.values(allPosts).map((post: any) => {
-	const pubDate = post.frontmatter?.pubDate
-		? new Date(post.frontmatter.pubDate)
-		: new Date(0);
-
-	return {
-		...post,
-		frontmatter: post.frontmatter,
-		url: post.url,
-		pubDate,
-		formattedDate: pubDate.toLocaleDateString('en-US', {
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric',
-		}),
-		description: post.frontmatter?.description ?? '',
-	};
-});
-
-const sortedPosts = posts.sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+const posts = getAllPosts();
 ---
 
 <Layout title="文章" description="最新文章列表">
@@ -34,7 +15,7 @@ const sortedPosts = posts.sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf
 		<div class="posts-divider" aria-hidden="true"></div>
 
 		<div class="posts-feed">
-			{sortedPosts.map((post) => (
+			{posts.map((post) => (
 				<article class="post-entry">
 					<h2 class="post-entry-title">
 						<a href={post.url}>{post.frontmatter.title}</a>

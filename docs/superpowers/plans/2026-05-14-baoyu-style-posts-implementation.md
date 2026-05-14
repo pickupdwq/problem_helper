@@ -562,7 +562,7 @@ pnpm dev
 
 Manual checks:
 
-- Open `http://localhost:4321/posts/2024-01-15-test-article`
+- Open `http://localhost:4321/posts/2026-05-14-agent-subagent-invocation`
 - Confirm title, author/date row, tags, headings, lists, and blockquote spacing all fit the new minimalist system
 - Confirm no thick header border or pill-style tags remain
 
@@ -636,7 +636,7 @@ Manual checks:
 
 - Open `http://localhost:4321/`
 - Open `http://localhost:4321/posts`
-- Open `http://localhost:4321/posts/2024-01-15-test-article`
+- Open `http://localhost:4321/posts/2026-05-14-agent-subagent-invocation`
 - Check the same pages again at a narrow mobile viewport
 
 Expected:
