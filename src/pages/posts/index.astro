@@ -1,0 +1,134 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const allPosts = import.meta.glob('./*.md', { eager: true });
+const posts = Object.values(allPosts).map((post: any) => {
+	const pubDate = post.frontmatter?.pubDate
+		? new Date(post.frontmatter.pubDate)
+		: new Date(0);
+
+	return {
+		...post,
+		frontmatter: post.frontmatter,
+		url: post.url,
+		pubDate,
+		formattedDate: pubDate.toLocaleDateString('en-US', {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+		}),
+		description: post.frontmatter?.description ?? '',
+	};
+});
+
+const sortedPosts = posts.sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+---
+
+<Layout title="文章" description="最新文章列表">
+	<section class="posts-page">
+		<header class="posts-header">
+			<h1>文章</h1>
+			<p>持续更新的写作、笔记与想法。</p>
+		</header>
+
+		<div class="posts-divider" aria-hidden="true"></div>
+
+		<div class="posts-feed">
+			{sortedPosts.map((post) => (
+				<article class="post-entry">
+					<h2 class="post-entry-title">
+						<a href={post.url}>{post.frontmatter.title}</a>
+					</h2>
+					{post.description && <p class="post-entry-summary">{post.description}</p>}
+					<div class="post-entry-meta">
+						<time datetime={post.pubDate.toISOString()}>{post.formattedDate}</time>
+						<a class="post-entry-action" href={post.url}>阅读全文</a>
+					</div>
+				</article>
+			))}
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.posts-page {
+		max-width: var(--content-width);
+	}
+
+	.posts-header {
+		margin-bottom: 1.5rem;
+	}
+
+	.posts-header h1 {
+		margin: 0;
+		font-size: clamp(2rem, 4vw, 2.8rem);
+		line-height: 1.15;
+		letter-spacing: 0;
+	}
+
+	.posts-header p {
+		margin: 0.85rem 0 0;
+		font-size: 1rem;
+		color: var(--text-secondary);
+	}
+
+	.posts-divider {
+		width: 100%;
+		height: 1px;
+		margin-bottom: 3rem;
+		background: rgba(15, 23, 42, 0.08);
+	}
+
+	.posts-feed {
+		display: grid;
+		gap: 3.25rem;
+	}
+
+	.post-entry-title {
+		margin: 0;
+		font-size: clamp(1.5rem, 3vw, 2rem);
+		line-height: 1.25;
+		letter-spacing: 0;
+	}
+
+	.post-entry-summary {
+		margin: 0.9rem 0 0;
+		font-size: 1rem;
+		color: var(--text-secondary);
+	}
+
+	.post-entry-meta {
+		margin-top: 1rem;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+		font-size: 0.92rem;
+		color: var(--text-muted);
+	}
+
+	.post-entry-action {
+		color: var(--text-primary);
+	}
+
+	.post-entry-action:hover,
+	.post-entry-title a:hover {
+		text-decoration: underline;
+		text-decoration-color: rgba(31, 41, 55, 0.24);
+		text-underline-offset: 0.18em;
+	}
+
+	@media (max-width: 640px) {
+		.posts-header {
+			margin-bottom: 1.25rem;
+		}
+
+		.posts-divider {
+			margin-bottom: 2.5rem;
+		}
+
+		.posts-feed {
+			gap: 2.5rem;
+		}
+	}
+</style>
