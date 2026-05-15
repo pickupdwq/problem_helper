@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+	<title id="title">多 Agent 角色分工</title>
+	<desc id="desc">从任务拆分到角色执行，再到统一验证的流程图。</desc>
+	<rect width="960" height="540" fill="#f8fafc"/>
+	<g font-family="Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">
+		<rect x="68" y="230" width="150" height="86" rx="16" fill="#ffffff" stroke="#cbd5e1"/>
+		<text x="143" y="282" fill="#0f172a">任务</text>
+		<rect x="278" y="230" width="150" height="86" rx="16" fill="#ede9fe" stroke="#8b5cf6"/>
+		<text x="353" y="282" fill="#5b21b6">拆分</text>
+		<rect x="488" y="120" width="150" height="70" rx="14" fill="#e0f2fe" stroke="#38bdf8"/>
+		<text x="563" y="164" fill="#075985">架构</text>
+		<rect x="488" y="235" width="150" height="70" rx="14" fill="#dcfce7" stroke="#22c55e"/>
+		<text x="563" y="279" fill="#166534">测试</text>
+		<rect x="488" y="350" width="150" height="70" rx="14" fill="#fef3c7" stroke="#f59e0b"/>
+		<text x="563" y="394" fill="#92400e">安全</text>
+		<rect x="738" y="230" width="150" height="86" rx="16" fill="#ffffff" stroke="#cbd5e1"/>
+		<text x="813" y="282" fill="#0f172a">验证</text>
+	</g>
+	<g stroke="#94a3b8" stroke-width="4" fill="none" stroke-linecap="round">
+		<path d="M218 273h60"/>
+		<path d="M428 273h38"/>
+		<path d="M466 273V155h22"/>
+		<path d="M466 273h22"/>
+		<path d="M466 273v112h22"/>
+		<path d="M638 155h70v118h30"/>
+		<path d="M638 270h100"/>
+		<path d="M638 385h70V273h30"/>
+	</g>
+</svg>

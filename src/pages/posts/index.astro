@@ -34,6 +34,7 @@ const posts = getAllPosts();
 <style>
 	.posts-page {
 		max-width: var(--content-width);
+		margin-inline: auto;
 	}
 
 	.posts-header {
@@ -42,14 +43,17 @@ const posts = getAllPosts();
 
 	.posts-header h1 {
 		margin: 0;
-		font-size: clamp(2rem, 4vw, 2.8rem);
+		font-family: var(--font-display);
+		font-size: 2.75rem;
 		line-height: 1.15;
 		letter-spacing: 0;
+		color: var(--text-strong);
 	}
 
 	.posts-header p {
 		margin: 0.85rem 0 0;
-		font-size: 1rem;
+		font-size: 1.06rem;
+		line-height: 1.8;
 		color: var(--text-secondary);
 	}
 
@@ -57,24 +61,44 @@ const posts = getAllPosts();
 		width: 100%;
 		height: 1px;
 		margin-bottom: 3rem;
-		background: rgba(15, 23, 42, 0.08);
+		background: var(--panel-border);
 	}
 
 	.posts-feed {
 		display: grid;
-		gap: 3.25rem;
+		gap: 1.25rem;
+	}
+
+	.post-entry {
+		padding: 1.25rem 1.3rem;
+		border: 1px solid rgba(40, 78, 99, 0.1);
+		border-radius: 10px;
+		background: rgba(255, 253, 248, 0.62);
+		transition:
+			border-color 180ms ease,
+			background-color 180ms ease,
+			transform 180ms ease;
+	}
+
+	.post-entry:hover {
+		border-color: rgba(40, 78, 99, 0.22);
+		background: rgba(255, 253, 248, 0.9);
+		transform: translateY(-2px);
 	}
 
 	.post-entry-title {
 		margin: 0;
-		font-size: clamp(1.5rem, 3vw, 2rem);
+		font-family: var(--font-display);
+		font-size: 1.72rem;
 		line-height: 1.25;
 		letter-spacing: 0;
+		color: var(--text-strong);
 	}
 
 	.post-entry-summary {
 		margin: 0.9rem 0 0;
 		font-size: 1rem;
+		line-height: 1.78;
 		color: var(--text-secondary);
 	}
 
@@ -109,7 +133,19 @@ const posts = getAllPosts();
 		}
 
 		.posts-feed {
-			gap: 2.5rem;
+			gap: 1rem;
+		}
+
+		.posts-header h1 {
+			font-size: 2.25rem;
+		}
+
+		.post-entry {
+			padding: 1rem;
+		}
+
+		.post-entry-title {
+			font-size: 1.42rem;
 		}
 	}
 </style>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+	<title id="title">Skill 插件系统</title>
+	<desc id="desc">发现、加载、执行、监控的插件系统流程。</desc>
+	<rect width="960" height="540" fill="#f8fafc"/>
+	<text x="64" y="78" fill="#0f172a" font-family="Arial, sans-serif" font-size="32" font-weight="700">插件系统要管完整生命周期</text>
+	<g font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle">
+		<rect x="86" y="230" width="150" height="76" rx="16" fill="#ffffff" stroke="#cbd5e1"/>
+		<text x="161" y="277" fill="#0f172a">发现</text>
+		<rect x="296" y="230" width="150" height="76" rx="16" fill="#e0f2fe" stroke="#38bdf8"/>
+		<text x="371" y="277" fill="#075985">加载</text>
+		<rect x="506" y="230" width="150" height="76" rx="16" fill="#dcfce7" stroke="#22c55e"/>
+		<text x="581" y="277" fill="#166534">执行</text>
+		<rect x="716" y="230" width="150" height="76" rx="16" fill="#fef3c7" stroke="#f59e0b"/>
+		<text x="791" y="277" fill="#92400e">监控</text>
+	</g>
+	<g stroke="#94a3b8" stroke-width="4" fill="none" stroke-linecap="round">
+		<path d="M236 268h60"/>
+		<path d="M446 268h60"/>
+		<path d="M656 268h60"/>
+	</g>
+</svg>

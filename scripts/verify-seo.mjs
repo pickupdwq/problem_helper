@@ -53,8 +53,9 @@ const run = async () => {
 	assertIncludes(agentSkillHtml, 'content="从任务不确定性、复用频率、执行风险和知识沉淀四个角度，讲清楚什么时候该用 Agent，什么时候该写 Skill。"', 'New article description meta should come from frontmatter.');
 	assertIncludes(agentSkillHtml, '<html lang="zh-CN">', 'New article should render the frontmatter language.');
 	assertIncludes(agentSkillHtml, '/images/articles/agent-vs-skill/agent-vs-skill-cover.svg', 'New article should render the cover image.');
-	assertIncludes(agentSkillHtml, '风格：克制的技术博客示意图，浅色背景，双栏对比', 'New article should render cover image style notes.');
-	assertIncludes(agentSkillHtml, '来源：本地自绘 SVG', 'New article should render image source notes.');
+	assertExcludes(agentSkillHtml, '图片信息', 'Article page should not render image notes below the article.');
+	assertExcludes(agentSkillHtml, '风格：', 'Article page should not render image style notes.');
+	assertExcludes(agentSkillHtml, '来源：', 'Article image notes should not expose implementation/source wording.');
 	assertMatches(agentSkillHtml, /<h1 class="article-title"[^>]*>什么时候使用 Agent，什么时候使用 Skill<\/h1>/, 'New article header should render the frontmatter title.');
 
 	assertIncludes(robotsTxt, 'User-agent: *', 'robots.txt should allow crawler access.');

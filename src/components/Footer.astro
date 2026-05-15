@@ -1,0 +1,71 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="site-footer-inner">
+		<div class="footer-brand">
+			<span class="footer-title">派的网站</span>
+			<span class="footer-subtitle">Pie's Website</span>
+		</div>
+		<p class="footer-copyright">© {year} 派</p>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		width: 100%;
+		border-top: 1px solid var(--panel-border);
+		margin-top: 4.5rem;
+	}
+
+	.site-footer-inner {
+		width: var(--shell-width);
+		margin: 0 auto;
+		padding: 2.35rem 0 2.1rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.footer-brand {
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
+	}
+
+	.footer-title {
+		font-size: 0.95rem;
+		font-weight: 600;
+		color: var(--text-strong);
+		letter-spacing: 0.02em;
+	}
+
+	.footer-subtitle {
+		font-size: 0.85rem;
+		color: var(--text-muted);
+		letter-spacing: 0.01em;
+	}
+
+	.footer-copyright {
+		margin: 0;
+		font-size: 0.85rem;
+		color: var(--text-muted);
+	}
+
+	@media (max-width: 640px) {
+		.site-footer-inner {
+			padding: 2rem 0 1.5rem;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.5rem;
+		}
+
+		.footer-brand {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.2rem;
+		}
+	}
+</style>

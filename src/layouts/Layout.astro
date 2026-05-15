@@ -1,5 +1,6 @@
 ---
 import Analytics from '@vercel/analytics/astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
 	title?: string;
@@ -92,6 +93,7 @@ const analyticsEnabled = Astro.site ? Astro.site.hostname === 'yaiiii.com' : fal
 			<main class="site-main">
 				<slot />
 			</main>
+			<Footer />
 		</div>
 		{analyticsEnabled && <Analytics />}
 	</body>
@@ -100,19 +102,25 @@ const analyticsEnabled = Astro.site ? Astro.site.hostname === 'yaiiii.com' : fal
 <style is:global>
 	:root {
 		color-scheme: light;
-		--page-bg: #fbfbf8;
-		--panel-border: rgba(15, 23, 42, 0.08);
-		--text-primary: #1f2937;
-		--text-secondary: #6b7280;
-		--text-muted: #9ca3af;
-		--link-color: #1f2937;
-		--link-hover: #0f172a;
-		--content-width: 46rem;
-		--shell-width: min(100%, 56rem);
+		--page-bg: #f7f3ea;
+		--page-surface: #fffdf8;
+		--panel-border: rgba(40, 78, 99, 0.12);
+		--text-strong: #172126;
+		--text-primary: #26343b;
+		--text-secondary: #647178;
+		--text-muted: #8d989d;
+		--link-color: #284e63;
+		--link-hover: #162f3f;
+		--content-width: 47.5rem;
+		--shell-width: min(100%, 58rem);
+		--font-body: 'Avenir Next', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+		--font-display: 'Songti SC', 'Noto Serif SC', 'Source Han Serif SC', 'STSong', serif;
+		--shadow-soft: 0 18px 48px rgba(40, 78, 99, 0.09);
 	}
 
 	html {
 		background: var(--page-bg);
+		scroll-behavior: smooth;
 	}
 
 	html,
@@ -120,7 +128,7 @@ const analyticsEnabled = Astro.site ? Astro.site.hostname === 'yaiiii.com' : fal
 		margin: 0;
 		width: 100%;
 		min-height: 100%;
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+		font-family: var(--font-body);
 		background: var(--page-bg);
 		color: var(--text-primary);
 		line-height: 1.75;
@@ -129,6 +137,10 @@ const analyticsEnabled = Astro.site ? Astro.site.hostname === 'yaiiii.com' : fal
 	body {
 		-webkit-font-smoothing: antialiased;
 		text-rendering: optimizeLegibility;
+		background:
+			linear-gradient(180deg, rgba(255, 253, 248, 0.92) 0%, rgba(247, 243, 234, 0.96) 42%, #f7f3ea 100%),
+			radial-gradient(circle at 18% 0%, rgba(105, 142, 157, 0.12), transparent 34%),
+			radial-gradient(circle at 92% 16%, rgba(202, 168, 106, 0.11), transparent 30%);
 	}
 
 	* {
@@ -138,6 +150,7 @@ const analyticsEnabled = Astro.site ? Astro.site.hostname === 'yaiiii.com' : fal
 	a {
 		color: var(--link-color);
 		text-decoration: none;
+		text-underline-offset: 0.18em;
 	}
 
 	a:hover {
@@ -151,11 +164,13 @@ const analyticsEnabled = Astro.site ? Astro.site.hostname === 'yaiiii.com' : fal
 
 	.site-shell {
 		min-height: 100vh;
-		padding: 0 1.25rem 4rem;
+		padding: 0 1.25rem;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.site-header {
-		padding: 1.5rem 0 2.5rem;
+		padding: 1.4rem 0 2.7rem;
 	}
 
 	.site-header-inner {
@@ -168,7 +183,25 @@ const analyticsEnabled = Astro.site ? Astro.site.hostname === 'yaiiii.com' : fal
 	}
 
 	.site-nav a {
+		min-height: 2.5rem;
+		display: inline-flex;
+		align-items: center;
+		padding: 0 0.75rem;
+		border: 1px solid rgba(40, 78, 99, 0.12);
+		border-radius: 999px;
+		background: rgba(255, 253, 248, 0.7);
 		font-size: 0.95rem;
+		color: var(--text-secondary);
+		transition:
+			background-color 180ms ease,
+			border-color 180ms ease,
+			color 180ms ease;
+	}
+
+	.site-nav a:hover {
+		border-color: rgba(40, 78, 99, 0.24);
+		background: rgba(255, 253, 248, 0.95);
+		color: var(--text-strong);
 	}
 
 	.site-nav {
@@ -181,11 +214,22 @@ const analyticsEnabled = Astro.site ? Astro.site.hostname === 'yaiiii.com' : fal
 	.site-main {
 		width: var(--shell-width);
 		margin: 0 auto;
+		flex: 1;
+	}
+
+	::selection {
+		background: rgba(202, 168, 106, 0.28);
+		color: var(--text-strong);
+	}
+
+	:focus-visible {
+		outline: 2px solid rgba(40, 78, 99, 0.45);
+		outline-offset: 3px;
 	}
 
 	@media (max-width: 640px) {
 		.site-shell {
-			padding: 0 1rem 3rem;
+			padding: 0 1rem;
 		}
 
 		.site-header {

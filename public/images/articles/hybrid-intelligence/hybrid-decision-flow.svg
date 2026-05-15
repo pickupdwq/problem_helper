@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+	<title id="title">Agent 与 Skill 决策流程</title>
+	<desc id="desc">根据不确定性、复用频率、风险决定使用 Agent、Skill 或混合模式。</desc>
+	<rect width="960" height="540" fill="#f8fafc"/>
+	<text x="60" y="76" fill="#0f172a" font-family="Arial, sans-serif" font-size="32" font-weight="700">先判断任务，再选择协作方式</text>
+	<g font-family="Arial, sans-serif" text-anchor="middle" font-size="21" font-weight="700">
+		<rect x="350" y="118" width="260" height="70" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+		<text x="480" y="162" fill="#0f172a">任务进来</text>
+		<rect x="80" y="250" width="220" height="86" rx="16" fill="#e0f2fe" stroke="#38bdf8"/>
+		<text x="190" y="286" fill="#075985">不确定性高</text>
+		<text x="190" y="316" fill="#075985">Agent 主导</text>
+		<rect x="370" y="250" width="220" height="86" rx="16" fill="#dcfce7" stroke="#22c55e"/>
+		<text x="480" y="286" fill="#166534">流程稳定</text>
+		<text x="480" y="316" fill="#166534">Skill 主导</text>
+		<rect x="660" y="250" width="220" height="86" rx="16" fill="#fef3c7" stroke="#f59e0b"/>
+		<text x="770" y="286" fill="#92400e">又复杂又重复</text>
+		<text x="770" y="316" fill="#92400e">混合模式</text>
+		<rect x="350" y="414" width="260" height="70" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+		<text x="480" y="458" fill="#0f172a">验证和兜底</text>
+	</g>
+	<g stroke="#94a3b8" stroke-width="4" fill="none" stroke-linecap="round">
+		<path d="M480 188v38"/>
+		<path d="M480 226H190v24"/>
+		<path d="M480 226v24"/>
+		<path d="M480 226h290v24"/>
+		<path d="M190 336v38h290v40"/>
+		<path d="M480 336v78"/>
+		<path d="M770 336v38H480v40"/>
+	</g>
+</svg>

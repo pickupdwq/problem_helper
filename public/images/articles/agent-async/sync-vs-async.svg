@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+	<title id="title">同步与异步对比</title>
+	<desc id="desc">同步适合短任务，异步适合长任务和可延后任务。</desc>
+	<rect width="960" height="540" fill="#f8fafc"/>
+	<text x="60" y="78" fill="#0f172a" font-family="Arial, sans-serif" font-size="32" font-weight="700">同步和异步怎么选</text>
+	<g font-family="Arial, sans-serif" font-size="22" font-weight="700">
+		<rect x="80" y="130" width="800" height="130" rx="20" fill="#ffffff" stroke="#cbd5e1"/>
+		<text x="120" y="180" fill="#0f172a">同步：请求 → 执行 → 立即返回结果</text>
+		<text x="120" y="220" fill="#64748b" font-size="18">适合短任务、耗时稳定、用户必须马上拿到结果</text>
+		<rect x="80" y="310" width="800" height="150" rx="20" fill="#e0f2fe" stroke="#38bdf8"/>
+		<text x="120" y="360" fill="#075985">异步：请求 → 任务 ID → 后台执行 → 稍后查看结果</text>
+		<text x="120" y="400" fill="#0369a1" font-size="18">适合慢任务、批任务、可延后任务和高峰削峰</text>
+	</g>
+</svg>
