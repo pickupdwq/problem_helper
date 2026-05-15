@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+	<title id="title">Agent 与 Skill 的使用边界</title>
+	<desc id="desc">一张技术示意图，对比 Agent 适合处理动态任务，Skill 适合沉淀稳定流程。</desc>
+	<rect width="1200" height="630" fill="#f8faf7"/>
+	<rect x="72" y="70" width="1056" height="490" rx="28" fill="#ffffff" stroke="#d9e2dc" stroke-width="2"/>
+	<text x="600" y="136" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="42" font-weight="700" fill="#18251f">什么时候使用 Agent，什么时候使用 Skill</text>
+	<text x="600" y="184" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" fill="#5d6b64">动态执行交给 Agent，稳定经验沉淀为 Skill</text>
+	<g transform="translate(122 246)">
+		<rect width="410" height="218" rx="18" fill="#eef7f1" stroke="#b8d3c2" stroke-width="2"/>
+		<circle cx="70" cy="70" r="35" fill="#26734d"/>
+		<path d="M52 73h36M70 55v36" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+		<text x="132" y="68" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="30" font-weight="700" fill="#173824">Agent</text>
+		<text x="132" y="108" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" fill="#456052">适合判断、调用工具、处理变化</text>
+		<text x="42" y="164" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="19" fill="#273b31">问题开放、路径不确定、需要连续决策</text>
+	</g>
+	<g transform="translate(668 246)">
+		<rect width="410" height="218" rx="18" fill="#f5f0e7" stroke="#dcc8a4" stroke-width="2"/>
+		<rect x="38" y="38" width="64" height="64" rx="14" fill="#9c6b1f"/>
+		<path d="M54 70h32M54 88h22M54 52h32" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+		<text x="132" y="68" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="30" font-weight="700" fill="#493513">Skill</text>
+		<text x="132" y="108" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" fill="#6a5634">适合规范、模板、复用流程</text>
+		<text x="42" y="164" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="19" fill="#4d3f28">做法稳定、规则清楚、需要长期一致</text>
+	</g>
+	<path d="M535 355h130" stroke="#91a59a" stroke-width="4" stroke-linecap="round" stroke-dasharray="12 12"/>
+	<path d="M650 340l28 15-28 15" fill="none" stroke="#91a59a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

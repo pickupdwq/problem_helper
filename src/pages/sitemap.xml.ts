@@ -12,7 +12,7 @@ const escapeXml = (value: string) =>
 const formatLastModified = (date: Date) => date.toISOString().split('T')[0];
 
 export const GET: APIRoute = ({ site }) => {
-	const baseUrl = site ?? new URL('https://example.com');
+	const baseUrl = site ?? new URL('https://yaiiii.com');
 	const posts = getAllPosts();
 	const latestPostDate = posts[0]?.pubDate ?? new Date();
 	const pages = [

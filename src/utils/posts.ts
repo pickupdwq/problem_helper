@@ -3,10 +3,21 @@ import type { MarkdownInstance } from 'astro';
 export interface PostFrontmatter {
 	title: string;
 	description?: string;
+	lang?: string;
 	pubDate?: string;
 	author?: string;
 	tags?: string[];
 	draft?: boolean;
+	cover?: PostImage;
+	images?: PostImage[];
+}
+
+export interface PostImage {
+	src: string;
+	alt: string;
+	caption?: string;
+	style?: string;
+	source?: string;
 }
 
 export interface PostEntry {

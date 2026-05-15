@@ -6,6 +6,8 @@ interface Props {
 	description?: string;
 	author?: string;
 	keywords?: string[];
+	lang?: string;
+	ogImagePath?: string;
 	ogType?: 'website' | 'article';
 	publishedTime?: string;
 	structuredData?: Record<string, unknown>;
@@ -20,6 +22,8 @@ const {
 	description = siteDescription,
 	author,
 	keywords = [],
+	lang = 'zh-CN',
+	ogImagePath = defaultOgImagePath,
 	ogType = 'website',
 	publishedTime,
 	structuredData,
@@ -32,13 +36,15 @@ const canonicalUrl = Astro.site
 	? new URL(normalizedPathname, Astro.site).toString()
 	: undefined;
 const ogImageUrl = Astro.site
-	? new URL(defaultOgImagePath, Astro.site).toString()
+	? new URL(ogImagePath, Astro.site).toString()
 	: undefined;
+const ogLocale = lang.toLowerCase().startsWith('zh') ? 'zh_CN' : 'en_US';
 const structuredDataJson = structuredData ? JSON.stringify(structuredData) : null;
+const analyticsEnabled = Astro.site ? Astro.site.hostname === 'yaiiii.com' : false;
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -52,7 +58,7 @@ const structuredDataJson = structuredData ? JSON.stringify(structuredData) : nul
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content={ogType} />
-		<meta property="og:locale" content="zh_CN" />
+		<meta property="og:locale" content={ogLocale} />
 		<meta property="og:site_name" content={siteTitle} />
 		{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
 		{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
@@ -87,7 +93,7 @@ const structuredDataJson = structuredData ? JSON.stringify(structuredData) : nul
 				<slot />
 			</main>
 		</div>
-		<Analytics />
+		{analyticsEnabled && <Analytics />}
 	</body>
 </html>
 

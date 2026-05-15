@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const distDir = path.join(process.cwd(), 'dist');
-const siteUrl = process.env.SITE_URL ?? 'https://example.com';
+const siteUrl = process.env.SITE_URL ?? 'https://yaiiii.com';
 
 const readDist = async (relativePath) => {
 	const filePath = path.join(distDir, relativePath);
@@ -31,6 +31,7 @@ const run = async () => {
 	const homeHtml = await readDist('index.html');
 	const postsHtml = await readDist('posts/index.html');
 	const articleHtml = await readDist('posts/2026-05-14-agent-subagent-invocation/index.html');
+	const agentSkillHtml = await readDist('posts/2026-05-15-when-to-use-agent-or-skill/index.html');
 	const robotsTxt = await readDist('robots.txt');
 	const sitemapXml = await readDist('sitemap.xml');
 
@@ -48,6 +49,13 @@ const run = async () => {
 	assertIncludes(homeHtml, '写作、笔记与问题拆解', 'Homepage should be a real landing page instead of a redirect shell.');
 	assertIncludes(articleHtml, 'application/ld+json', 'Article page should expose JSON-LD structured data.');
 	assertIncludes(articleHtml, 'property="og:image"', 'Article page should emit an Open Graph image.');
+	assertIncludes(agentSkillHtml, '<title>什么时候使用 Agent，什么时候使用 Skill | 派</title>', 'New article title tag should come from frontmatter.');
+	assertIncludes(agentSkillHtml, 'content="从任务不确定性、复用频率、执行风险和知识沉淀四个角度，讲清楚什么时候该用 Agent，什么时候该写 Skill。"', 'New article description meta should come from frontmatter.');
+	assertIncludes(agentSkillHtml, '<html lang="zh-CN">', 'New article should render the frontmatter language.');
+	assertIncludes(agentSkillHtml, '/images/articles/agent-vs-skill/agent-vs-skill-cover.svg', 'New article should render the cover image.');
+	assertIncludes(agentSkillHtml, '风格：克制的技术博客示意图，浅色背景，双栏对比', 'New article should render cover image style notes.');
+	assertIncludes(agentSkillHtml, '来源：本地自绘 SVG', 'New article should render image source notes.');
+	assertMatches(agentSkillHtml, /<h1 class="article-title"[^>]*>什么时候使用 Agent，什么时候使用 Skill<\/h1>/, 'New article header should render the frontmatter title.');
 
 	assertIncludes(robotsTxt, 'User-agent: *', 'robots.txt should allow crawler access.');
 	assertIncludes(robotsTxt, `Sitemap: ${siteUrl}/sitemap.xml`, 'robots.txt should advertise sitemap.xml.');
@@ -55,6 +63,7 @@ const run = async () => {
 	assertIncludes(sitemapXml, `<loc>${siteUrl}/</loc>`, 'Sitemap should include homepage.');
 	assertIncludes(sitemapXml, `<loc>${siteUrl}/posts</loc>`, 'Sitemap should include posts index.');
 	assertIncludes(sitemapXml, `<loc>${siteUrl}/posts/2026-05-14-agent-subagent-invocation</loc>`, 'Sitemap should include article page.');
+	assertIncludes(sitemapXml, `<loc>${siteUrl}/posts/2026-05-15-when-to-use-agent-or-skill</loc>`, 'Sitemap should include the new Agent versus Skill article page.');
 };
 
 run().catch((error) => {

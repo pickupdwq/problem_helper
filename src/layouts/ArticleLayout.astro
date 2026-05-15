@@ -5,10 +5,21 @@ import type { MarkdownLayoutProps } from 'astro';
 interface Frontmatter {
 	title: string;
 	description?: string;
+	lang?: string;
 	pubDate?: string;
 	author?: string;
 	tags?: string[];
 	draft?: boolean;
+	cover?: ArticleImage;
+	images?: ArticleImage[];
+}
+
+interface ArticleImage {
+	src: string;
+	alt: string;
+	caption?: string;
+	style?: string;
+	source?: string;
 }
 
 type Props = MarkdownLayoutProps<Frontmatter>;
@@ -16,9 +27,12 @@ const { frontmatter, url } = Astro.props as Props;
 const {
 	title,
 	description = '',
+	lang = 'zh-CN',
 	pubDate,
 	author,
 	tags = [],
+	cover,
+	images = [],
 } = frontmatter;
 
 const pubDateObj = pubDate ? new Date(pubDate) : null;
@@ -35,19 +49,22 @@ const articleUrl =
 	Astro.site && url
 		? new URL(url === '/' ? '/' : url.replace(/\/+$/, ''), Astro.site).toString()
 		: undefined;
+const structuredImages = [cover, ...images].filter((image): image is ArticleImage => Boolean(image));
 const structuredData = Object.fromEntries(
 	Object.entries({
 		'@context': 'https://schema.org',
 		'@type': 'Article',
 		headline: title,
 		description,
-		inLanguage: 'zh-CN',
+		inLanguage: lang,
 		author: author ? { '@type': 'Person', name: author } : undefined,
 		datePublished: publishedTime,
 		mainEntityOfPage: articleUrl,
+		image: structuredImages.length > 0 ? structuredImages.map((image) => image.src) : undefined,
 		keywords: tags.length > 0 ? tags.join(', ') : undefined,
 	}).filter(([, value]) => value !== undefined && value !== '')
 );
+const ogImagePath = cover?.src;
 ---
 
 <Layout
@@ -55,6 +72,8 @@ const structuredData = Object.fromEntries(
 	description={description}
 	author={author}
 	keywords={tags}
+	lang={lang}
+	ogImagePath={ogImagePath}
 	ogType="article"
 	publishedTime={publishedTime}
 	structuredData={structuredData}
@@ -74,10 +93,36 @@ const structuredData = Object.fromEntries(
 					{tags.map((tag) => <li>{tag}</li>)}
 				</ul>
 			)}
+			{cover && (
+				<figure class="article-cover">
+					<img src={cover.src} alt={cover.alt} loading="eager" />
+					{(cover.caption || cover.style || cover.source) && (
+						<figcaption>
+							{cover.caption && <span>{cover.caption}</span>}
+							{cover.style && <span>风格：{cover.style}</span>}
+							{cover.source && <span>来源：{cover.source}</span>}
+						</figcaption>
+					)}
+				</figure>
+			)}
 		</header>
 		<div class="article-content">
 			<slot />
 		</div>
+		{images.length > 0 && (
+			<section class="image-notes" aria-labelledby="image-notes-title">
+				<h2 id="image-notes-title">图片信息</h2>
+				<ul>
+					{images.map((image) => (
+						<li>
+							<span>{image.caption || image.alt}</span>
+							{image.style && <span>风格：{image.style}</span>}
+							{image.source && <span>来源：{image.source}</span>}
+						</li>
+					))}
+				</ul>
+			</section>
+		)}
 	</article>
 </Layout>
 
@@ -122,6 +167,28 @@ const structuredData = Object.fromEntries(
 		font-size: 0.92rem;
 	}
 
+	.article-cover {
+		margin: 2rem 0 0;
+	}
+
+	.article-cover img {
+		width: 100%;
+		border: 1px solid rgba(15, 23, 42, 0.08);
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.7);
+		box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+	}
+
+	.article-cover figcaption,
+	.article-content :global(figcaption) {
+		margin-top: 0.7rem;
+		display: grid;
+		gap: 0.25rem;
+		font-size: 0.88rem;
+		line-height: 1.6;
+		color: var(--text-secondary);
+	}
+
 	.article-content {
 		font-size: 1.08rem;
 		color: var(--text-primary);
@@ -131,8 +198,13 @@ const structuredData = Object.fromEntries(
 	.article-content :global(ul),
 	.article-content :global(ol),
 	.article-content :global(blockquote),
+	.article-content :global(figure),
 	.article-content :global(pre) {
 		margin: 1.35rem 0;
+	}
+
+	.article-content :global(figure) {
+		margin: 2rem 0;
 	}
 
 	.article-content :global(h2) {
@@ -162,11 +234,39 @@ const structuredData = Object.fromEntries(
 	}
 
 	.article-content :global(img) {
-		margin: 2rem auto 0;
+		margin: 0 auto;
 		border: 1px solid rgba(15, 23, 42, 0.08);
 		border-radius: 8px;
 		background: rgba(255, 255, 255, 0.7);
 		box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+	}
+
+	.image-notes {
+		margin-top: 3rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(15, 23, 42, 0.08);
+		color: var(--text-secondary);
+	}
+
+	.image-notes h2 {
+		margin: 0;
+		font-size: 1.05rem;
+		letter-spacing: 0;
+		color: var(--text-primary);
+	}
+
+	.image-notes ul {
+		margin: 1rem 0 0;
+		padding-left: 1.2rem;
+	}
+
+	.image-notes li {
+		margin: 0.55rem 0;
+	}
+
+	.image-notes span + span::before {
+		content: ' / ';
+		color: var(--text-muted);
 	}
 
 	.article-content :global(pre) {
